@@ -4,14 +4,14 @@
   <head>
     <title>URL Shortener</title>
     <link rel="icon" type="image/png" href="../public/favicon.ico" />
-    <link href="./public/style.css" rel="stylesheet" type="text/css" />
+    <link href="../public/style.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
     <h1>URL Shortener Microservice</h1>
     <main>
       <section>
-        <form action="api/shorturl/new" method="POST">
+        <form action="http://localhost:3000/api/shorturl/new" method="POST">
           <fieldset>
             <legend>URL Shortener</legend>
             <label for="url_input">URL:</label>
@@ -19,7 +19,7 @@
               id="url_input"
               type="text"
               name="url"
-              placeholder="https://www.freecodecamp.org/"
+              placeholder="URL"
             />
             <input type="submit" value="POST URL" />
           </fieldset>
@@ -27,7 +27,7 @@
       </section>
     </main>
     <footer>
-      <p>By <a href="https://www.freecodecamp.org/">freeCodeCamp</a></p>
+      <p>By Tomer Nissim</p>
     </footer>
   </body>
 </html>
