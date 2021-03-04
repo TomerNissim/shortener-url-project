@@ -16,14 +16,15 @@ app.post("/api/shorturl/new", async (req, res) => {
   res.send("http://" + req.get("host") + "/" + id).status(200);
 })
 
-// app.get("/", (req, res) => {
-//   res.sendFile(__dirname + "/views/index.html");
-// });
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/views/index.html");
+});
 
 app.get("/:id", async (req,res) => {
   const id = req.params.id;
   if(id === "favicon.ico"){
-    res.status(200);
+    res.status(400);
     return ;
   }
 
@@ -31,5 +32,14 @@ app.get("/:id", async (req,res) => {
   if(url!== null){
     res.redirect(url);
   }
+})
+app.get("/api/statistic/:id", async (req,res) => {
+  const id = req.params.id;
+  let statistics = await DataBase.getStatistics(id);
+  if(statistics!== null){
+
+    res.send(statistics).status(200)
+  }
+  else res.send("hi") 
 })
 module.exports = app;

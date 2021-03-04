@@ -21,7 +21,7 @@ class DataBase {
             return item.id;
         }
         let item = {
-            creationDate: Date.now(),
+            creationDate: convertDate(new Date()),
             redirectCount: 0,
             originalUrl: body.url,
             id: shortid.generate()
@@ -44,6 +44,26 @@ class DataBase {
         } 
         return null;    
     }
-}
 
+    static async getStatistics(shortUrl){
+        // shortUrl = shortUrl.toString() ;
+        await this.readData();
+        console.log(shortUrl);
+        for(let item of this.items){
+            if(item.id === shortUrl){
+                return {creationDate: item.creationDate ,
+                        redirectCount: item.redirectCount ,
+                        originalUrl: item.originalUrl ,
+                        id: item.id
+                } 
+            }
+        }
+        return null
+    }
+
+   
+}
+function convertDate(date){
+    return date.toISOString().toString().replace("T"," ").substr(0,19);
+}
 module.exports = DataBase;
