@@ -15,8 +15,8 @@ class DataBase {
     }
 
     static async addUrl(body){
-        if(!isValidProtocol(body)){
-            return "400/protocol"
+        if(!isValidUrl(body.url)){
+            return "400/URL"
         }
         await this.readData();
         for(let item of this.items){
@@ -37,9 +37,6 @@ class DataBase {
     }
 
     static async getOriginUrl(id) { 
-        if(!shortid.isValid(id)){
-            return "400/short-url";
-        }
         await this.readData();
         for(let item of this.items){
             if(id === item.id){
@@ -69,14 +66,29 @@ class DataBase {
         return "404/statistic"
     }
 
-}
-
-function isValidProtocol(url){
-    if(url.startsWith("http://") || url.startsWith("https://")){
-        return true;
+    static async getShortUrl(longUrl){
+        await this.readData();
+        for(let item of this.items){
+            if(item.originalUrl === longUrl){
+                return item.id;
+            }
+        }
     }
-    return false;
+
+}    
+    
+function isValidUrl(fullUrl) {
+        const pattern = new RegExp(/^(https?|ftp|torrent|image|irc):\/\/+([w|W]{3}\.)?(-\.)?([^\s\/?\.#]+\.?)+(\/[^\s]*)?$/);
+        return pattern.test(fullUrl);
 }
+    
+    // function isValidProtocol(url){
+//     console.log(url);
+//     // if(url.toString().startsWith("http://") || url.startsWith("https://")){
+//     //     return true;
+//     // }
+//     // return false;
+// }
 function convertDate(date){
     return date.toISOString().toString().replace("T"," ").substr(0,19);
 }
