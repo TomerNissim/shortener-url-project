@@ -49,9 +49,6 @@ class DataBase {
     }
 
     static async getStatistics(shortUrl){
-        if(!shortid.isValid(shortUrl)){
-            return "400/short-url";
-        }
         await this.readData();
         console.log(shortUrl);
         for(let item of this.items){
@@ -82,13 +79,6 @@ function isValidUrl(fullUrl) {
         return pattern.test(fullUrl);
 }
     
-    // function isValidProtocol(url){
-//     console.log(url);
-//     // if(url.toString().startsWith("http://") || url.startsWith("https://")){
-//     //     return true;
-//     // }
-//     // return false;
-// }
 function convertDate(date){
     return date.toISOString().toString().replace("T"," ").substr(0,19);
 }
