@@ -1,6 +1,4 @@
-#  URL shortener 
-This is my URL shortener 
-
+#  Tomer Nissim URL shortener 
 
 ## how does it works?
 first of all clone my code to your computer.
